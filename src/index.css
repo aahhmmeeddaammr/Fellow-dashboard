@@ -1,0 +1,231 @@
+@import "tailwindcss";
+@theme {
+  --color-primary: #0097b2;
+  --color-primaryOverlay: #0097b266;
+  --color-primarySubtle: #e9f9fc;
+  --color-secondary: #ccff02;
+  --color-primaryGrey: #6b7280;
+  --color-primaryGreySubtle: #aab5c3;
+  --color-primaryDark: #065361;
+  --breakpoint-nav: 820px;
+  --breakpoint-xl: 1281px;
+}
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+}
+.sidebar {
+  height: 100vh;
+}
+.fellow_grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    "video video video video groups groups groups groups classes classes classes classes"
+    "fellow fellow fellow fellow join join join join calendar calendar calendar calendar"
+    "Table Table Table Table Table Table Table Table selectgroups selectgroups selectgroups selectgroups";
+  @apply gap-5;
+}
+
+.video {
+  /* gr */
+  grid-area: video !important;
+}
+
+.groups {
+  /* gr */
+  grid-area: groups !important;
+}
+.classes {
+  /* gr */
+  grid-area: classes !important;
+}
+.fellow {
+  grid-area: fellow !important;
+  @apply bg-primary flex flex-col items-center relative rounded-3xl overflow-hidden pt-7;
+}
+
+.Table {
+  grid-area: Table !important;
+  @apply bg-white flex flex-col gap-5 rounded-3xl min-w-fit py-5 px-7;
+}
+
+.selectgroups {
+  grid-area: selectgroups !important;
+  @apply bg-white flex flex-col gap-5 rounded-3xl min-w-fit py-5 px-7;
+}
+
+.react-calendar {
+  font-family: Plus Jakarta Sans;
+}
+
+.react-calendar__navigation {
+  @apply flex items-center;
+}
+
+.react-calendar__navigation button {
+  background-color: transparent !important;
+  border-bottom: 0.3px solid #6b7280;
+  @apply text-[#065361] text-lg font-bold pb-2;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  @apply my-2;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none !important;
+  @apply font-medium text-[18px] leading-5 text-[#AAB5C3];
+}
+
+.react-calendar__tile abbr {
+  @apply size-[30px] m-auto my-1 flex items-center justify-center text-black/60 text-[18px] leading-5 rounded-full;
+}
+
+.react-calendar__tile--now abbr {
+  @apply bg-[#CCFF02];
+}
+
+.react-calendar__month-view__days__day--neighboringMonth abbr,
+.react-calendar__decade-view__years__year--neighboringDecade abbr,
+.react-calendar__century-view__decades__decade--neighboringCentury abbr {
+  color: #9291a5 !important;
+}
+
+.react-calendar__tile:enabled abbr:hover {
+  @apply border border-primary;
+}
+
+.old-class abbr {
+  color: white !important;
+  @apply bg-[#065361];
+}
+
+.new-class abbr {
+  color: white !important;
+  @apply bg-primary;
+}
+
+/* Status bill */
+.absent,
+.low,
+.almost-there,
+.Rejected {
+  @apply bg-[#FBD7E0] text-[#FF002F];
+}
+
+.attended,
+.high,
+.trail-blazer,
+.trailblazer,
+.accepted {
+  @apply bg-[#BCEFBD] text-[#04CD00] text-nowrap;
+}
+
+.tbd {
+  @apply bg-[#E6EAEE] text-[#B9B9B9];
+}
+
+.medium,
+.pending {
+  @apply bg-[#FFF69D] text-[#FF9B12];
+}
+
+.rising-champ,
+.late {
+  @apply bg-[#FFFCDD] text-[#FFC700];
+}
+
+.hero-learner,
+.received {
+  @apply bg-[#C6D2FD] text-[#2D5BFF];
+}
+
+.superstar {
+  @apply bg-[#F0E3FF] text-[#962DFF];
+}
+
+.freeze {
+  @apply bg-[#C6D2FD] text-[#2D5BFF];
+}
+
+.fc * {
+  border: none !important;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-[#065361] text-2xl md:text-[28px] leading-6 font-semibold tracking-[-0.02em];
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply md:text-[20px] text-[#0097B266] leading-6 font-semibold tracking-[-0.02em];
+}
+
+.fc .fc-button-group {
+  @apply flex items-center gap-4 me-1.5;
+}
+
+.fc .fc-button-group > .fc-button,
+.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child),
+.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+  @apply size-8 bg-[#0097B259] text-primary rounded-lg flex justify-center items-center focus:shadow-none;
+}
+
+.fc .fc-daygrid-day {
+  @apply max-sm:p-1 p-[6px];
+}
+
+.fc .fc-daygrid-day-frame {
+  @apply bg-white p-2 max-sm:rounded-full rounded-2xl aspect-square flex flex-col items-center justify-center;
+}
+
+.fc .fc-daygrid-day-events {
+  @apply max-xl:hidden flex flex-col items-center justify-center flex-grow;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-transparent;
+
+  .fc-daygrid-day-frame {
+    @apply bg-[#CCFF02];
+  }
+
+  .fc-daygrid-day-top {
+    @apply text-[#065361] opacity-100;
+  }
+}
+
+.fc .fc-daygrid-day-top {
+  font-weight: 600;
+  @apply block text-primary xl:self-start md:text-2xl xl:text-xl;
+}
+
+.fc .full-calendar-absent > div {
+  .fc-daygrid-day-top {
+    color: white !important;
+    opacity: 1 !important;
+  }
+
+  @apply xl:bg-[#065361] bg-[#FBD7E0];
+}
+
+.fc .full-calendar-not-absent > div {
+  .fc-daygrid-day-top {
+    color: white !important;
+    opacity: 1 !important;
+  }
+
+  @apply xl:bg-[#065361] bg-[#BCEFBD];
+}
+
+.full-calendar-new > div {
+  .fc-daygrid-day-top {
+    color: white !important;
+    opacity: 1 !important;
+  }
+  @apply bg-primary;
+}
