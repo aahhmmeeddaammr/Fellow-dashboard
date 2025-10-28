@@ -28,8 +28,6 @@ export default function GroupStatusPill<T extends FieldValues>({
         const { value, onChange } = field;
 
         if (!isEditing) {
-          console.log(value);
-          
           if (value == 0 || value) {
             return (
               <div onClick={() => setIsEditing(true)} className="cursor-pointer">
@@ -43,7 +41,7 @@ export default function GroupStatusPill<T extends FieldValues>({
           <GroupDetailsSelector
             setSelected={(val) => {
               onChange(val as PathValue<T, Path<T>>);
-              setIsEditing(false); // ✅ go back to pill after selection
+              setIsEditing(false); 
             }}
             selected={value}
             label="Select"

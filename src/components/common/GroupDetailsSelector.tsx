@@ -1,4 +1,3 @@
-"use client";
 import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
 import ReactDOM from "react-dom";
 import type { Option } from "./GroupStatusPill";
@@ -90,7 +89,7 @@ export default function GroupDetailsSelector({
               : "hover:border-primary"
           }`}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between"  >
           <span className="text-nowrap pointer-events-none">{selected ? selected : label}</span>
           <svg
             className={`${selected ? "fill-primary" : "fill-[#979797]"} ${
@@ -118,7 +117,7 @@ export default function GroupDetailsSelector({
               position: "absolute",
               top: position.top,
               left: position.left,
-              maxWidth: position.width,
+              width: position.width,
               zIndex: 9999,
             }}
             className="max-h-[198px] rounded-b-lg overflow-y-auto shadow-lg text-sm"

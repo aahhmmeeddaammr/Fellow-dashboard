@@ -7,6 +7,7 @@ import FellowCalendar from "./pages/Calendar/Calendar";
 import Login from "./pages/login/login";
 import FellowAccount from "./pages/Account/Account";
 import Support from "./pages/Support/Support";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,12 @@ const router = createBrowserRouter([
   },
 ]);
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  );
 };
 
 export default App;

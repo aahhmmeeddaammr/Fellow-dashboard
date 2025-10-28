@@ -1,4 +1,3 @@
-  "use client";
   import React, { useState } from "react";
   import Flag from "react-world-flags";
   import { Controller } from "react-hook-form";

@@ -3,10 +3,10 @@ import ChangePasswordModal from "../../components/Fellow/ChangePasswordModal";
 import EditImageIcon from "../../icons/EditImageIcon";
 import arrow from "../../assets/images/arrow.png";
 import user from "../../assets/images/2user.svg";
-import { useFellowAccount } from "../../Hooks/useFellow";
+import { useFellowAccount, useFellowMutations } from "../../Hooks/useFellow";
 const FellowAccount = () => {
   const { data } = useFellowAccount();
-
+  const { updateData } = useFellowMutations();
   const accountInfo = [
     { label: "Full Name", value: data?.fullName },
     { label: "Fellow ID", value: data?.id },
@@ -26,7 +26,19 @@ const FellowAccount = () => {
             <div className="ml-2">
               <EditImageIcon />
             </div>
-            <input type="file" hidden id="feedbackFile" />
+            <input
+              type="file"
+              hidden
+              id="feedbackFile"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const updatedFormData = new FormData();
+                  updatedFormData.append("photo", file);
+                  updateData({ data: updatedFormData });
+                }
+              }}
+            />
           </label>
           <p className="font-bold text-2xl text-white">{data?.fullName}</p>
           <p className="text-white font-medium">ID: {data?.id}</p>

@@ -13,6 +13,7 @@ export const useGroupSessions = ({ id }: { id: string }) => {
     queryKey: ["groupSessions", id],
     queryFn: async () => await getGroupSessions(id),
     select: (data) => data.data.data,
+    enabled: !!id,
   });
   return query;
 };

@@ -122,8 +122,9 @@
 .high,
 .trail-blazer,
 .trailblazer,
-.accepted {
-  @apply bg-[#BCEFBD] text-[#04CD00] text-nowrap;
+.accepted,
+.risingchamp {
+  @apply bg-[#BCEFBD] text-[#04CD00] text-nowrap text-xs;
 }
 
 .tbd {

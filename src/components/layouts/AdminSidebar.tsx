@@ -1,9 +1,9 @@
-"use client";
 import { useEffect, useState } from "react";
 import SidebarLink from "./SidebarLink";
 import logo from "../../assets/images/logo.png";
 import logoMd from "../../assets/images/nav-arrow.svg";
 import LogoutModal from "../common/LogoutModal";
+import { ChevronLeft } from "lucide-react";
 
 export default function AdminSidebar({ pages }: { pages: SidebarRoute[] }) {
   const [isOpen, setIsOpen] = useState<boolean | undefined>(undefined);
@@ -34,14 +34,14 @@ export default function AdminSidebar({ pages }: { pages: SidebarRoute[] }) {
     <div
       className={`${isOpen === false ? "max-w-[90px]" : "max-w-60"} bg-primary h-full ${
         isOpen === false ? "px-3 items-center" : "max-lg:px-3"
-      } p-6 rounded-[20px] flex flex-col max-lg:items-center gap-5`}
+      } p-6 rounded-[20px] flex flex-col max-lg:items-center gap-5 transition-all duration-300`}
     >
       <div className="flex justify-end max-lg:hidden">
         <button
           onClick={toggleSidebar}
           className="size-8 bg-[#c2f6ff66] text-[#C2F6FF] rounded-lg flex justify-center items-center text-sm"
         >
-          <i className={`fa-solid fa-chevron-left transition-transform  duration-200 ${isOpen === false && "rotate-180"}`}></i>
+          <ChevronLeft className={`${isOpen === false && "rotate-180"}`} />
         </button>
       </div>
       <div className="h-10 flex items-center justify-center">

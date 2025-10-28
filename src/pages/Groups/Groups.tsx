@@ -110,7 +110,6 @@ export default function Groups() {
               </svg>
             </div>
 
-            {/* Input */}
             <input
               id="search"
               type="text"

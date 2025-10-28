@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback, Suspense } from "react";
+import React, { memo, useMemo, useCallback, Suspense, useState, useEffect } from "react";
 import { useFellowUpcomingSessions } from "../../Hooks/useFellow";
 import { useFellowCalendar } from "../../Hooks/useFellowCalendar";
 import BookIcon from "../../icons/BookIcon";
@@ -50,22 +50,44 @@ const FellowCalendarCard = memo(({ ageGroup, groupName, packageName, sessionTime
 });
 
 export default function FellowCalendar() {
-  const { data } = useFellowUpcomingSessions();
-  const { data: calendarData } = useFellowCalendar({ month: "8", year: "2025" });
+  const { data: upcomingSessions } = useFellowUpcomingSessions();
+
+  // 🧠 Keep month/year persistent — don’t reset
+  const [month, setMonth] = useState(() => new Date().getMonth() + 1);
+  const [year, setYear] = useState(() => new Date().getFullYear());
+
+  const { data: calendarData, refetch } = useFellowCalendar({
+    month: month.toString(),
+    year: year.toString(),
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [month, year, refetch]);
+
+  const calendarProps = useMemo(
+    () => ({
+      data: calendarData,
+      onMonthChange: (newMonth: number) => setMonth(newMonth),
+      onYearChange: (newYear: number) => setYear(newYear),
+      selectedMonth: month,
+      selectedYear: year,
+    }),
+    [calendarData, month, year]
+  );
 
   return (
-    <section className="grid grid-cols-[minmax(0,auto)_180px] gap-4">
-      {calendarData && (
-        <Suspense fallback={<p className="text-center text-gray-500">Loading Calendar...</p>}>
-          <DashboardCalendar data={calendarData as CalendarType} />
-        </Suspense>
-      )}
+    <section className="grid grid-cols-[minmax(0,auto)_220px] gap-4">
+      <Suspense fallback={<p className="text-center text-gray-500">Loading Calendar...</p>}>
+        <DashboardCalendar {...calendarProps} />
+      </Suspense>
 
       <aside className="bg-primary px-3 py-5 rounded-xl flex flex-col items-center gap-5">
-        <h2 className="text-white text-xl font-semibold">Today’s Sessions</h2>
-        {data?.todays?.length ? (
+        <h2 className="text-white text-xl font-semibold">Today's Sessions</h2>
+
+        {upcomingSessions?.todays?.length ? (
           <ul className="space-y-4 w-full">
-            {data.todays.map((item, index) => (
+            {upcomingSessions.todays.map((item, index) => (
               <li key={index}>
                 <FellowCalendarCard
                   ageGroup={item.ageGroup}

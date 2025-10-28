@@ -40,7 +40,7 @@ export default function StatusPill({ variant, isFuture, isFreeze }: StatusPillPr
   }
   console.log("variant", variant);
 
-  const safeVariant = variant.replace(/\s|!|🚀/g, "").toLowerCase();
+  const safeVariant = variant.replace(/\s|!|🚀|🏆/g, "").toLowerCase();
 
   return (
     <div
