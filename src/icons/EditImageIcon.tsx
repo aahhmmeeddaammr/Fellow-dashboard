@@ -1,14 +1,6 @@
-import React from "react";
-
 const EditImageIcon = () => {
   return (
-    <svg
-      width={18}
-      height={18}
-      viewBox="0 0 18 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={18} height={18} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         opacity="0.4"
         d="M11.61 2.25H5.64C3.0525 2.25 1.5 3.795 1.5 6.39V12.3525C1.5 14.955 3.0525 16.5 5.64 16.5H11.6025C14.1975 16.5 15.7425 14.955 15.7425 12.36V6.39C15.75 3.795 14.1975 2.25 11.61 2.25Z"

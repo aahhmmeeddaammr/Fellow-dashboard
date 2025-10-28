@@ -1,10 +1,6 @@
-import React from "react";
+import type { IconProps } from "./BookIcon";
 
-export default function CalendarIcon({
-  fill,
-  duration,
-  transition,
-}: IconProps) {
+export default function CalendarIcon({ fill, duration, transition }: IconProps) {
   return (
     <svg
       width="16"

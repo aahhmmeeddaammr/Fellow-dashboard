@@ -18,6 +18,7 @@ function CalendarCard({ dates }: { dates: string[] }) {
         prevLabel={<ChevronLeft className="text-[#6B7280] mb-1" />}
         calendarType="islamic"
         formatShortWeekday={(locale, date) => {
+          console.log(locale);
           const customWeekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
           return customWeekdays[date.getDay()];
         }}

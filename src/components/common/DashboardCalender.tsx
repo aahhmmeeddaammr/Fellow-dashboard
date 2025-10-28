@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import type { ViewApi } from "@fullcalendar/core";
@@ -16,7 +16,7 @@ export type CalendarType = {
   upcomingClasses: ClassItem[];
 };
 
-type DashboardCalendarProps = {
+export type DashboardCalendarProps = {
   data: CalendarType;
   onMonthChange: (month: number) => void;
   onYearChange: (year: number) => void;

@@ -1,14 +1,12 @@
-import React from "react";
-
+export interface IconProps {
+  fill?: string;
+  duration?: string;
+  transition?: string;
+  size?: number;
+}
 export default function BookIcon({ fill }: IconProps) {
   return (
-    <svg
-      className={fill}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg className={fill} width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path
         opacity="0.4"
         d="M13.6654 4.66634V9.99967H4.23203C3.18536 9.99967 2.33203 10.853 2.33203 11.8997V4.66634C2.33203 1.99967 2.9987 1.33301 5.66536 1.33301H10.332C12.9987 1.33301 13.6654 1.99967 13.6654 4.66634Z"

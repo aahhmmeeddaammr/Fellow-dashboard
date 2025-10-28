@@ -5,6 +5,7 @@ import BookIcon from "../../icons/BookIcon";
 import ClockIcon from "../../icons/ClockIcon";
 import PresentationChartIcon from "../../icons/PresentationChartIcon";
 import UserIcon from "../../icons/UserIcon";
+import type { DashboardCalendarProps } from "../../components/common/DashboardCalender";
 
 const DashboardCalendar = React.lazy(() => import("../../components/common/DashboardCalender"));
 
@@ -79,7 +80,7 @@ export default function FellowCalendar() {
   return (
     <section className="grid grid-cols-[minmax(0,auto)_220px] gap-4">
       <Suspense fallback={<p className="text-center text-gray-500">Loading Calendar...</p>}>
-        <DashboardCalendar {...calendarProps} />
+        <DashboardCalendar {...(calendarProps as DashboardCalendarProps)} />
       </Suspense>
 
       <aside className="bg-primary px-3 py-5 rounded-xl flex flex-col items-center gap-5">

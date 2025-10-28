@@ -1,4 +1,4 @@
-const GroupCard = ({ group }) => {
+const GroupCard = ({ group }: { group: FellowHomeGroup }) => {
   console.log(group);
 
   return (

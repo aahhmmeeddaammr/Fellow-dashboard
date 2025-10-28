@@ -33,6 +33,8 @@ declare interface FellowHomeGroup {
   startTime: string;
   groupId: number;
   schedule: string;
+  studentsNumber: number;
+  packgeName: string;
 }
 
 // Fellow Session details (from /fellow sessions endpoint)
@@ -85,6 +87,10 @@ declare interface FellowSessionProps {
   studentsNumber?: number; // not always present
   ageGroup: string; // backend sends string, not number
   zoomLink: string;
+  startTime: string;
+  meetingLink: string;
+  packageName: string;
+  sessionOrder: number;
 }
 
 // Sessions for a group
@@ -130,6 +136,6 @@ declare interface SupportRequest {
 }
 
 declare interface FellowUpcommingSessions {
-  todays: FellowHomeGroup[];
-  comming: FellowHomeGroup[];
+  todays: FellowSessionProps[];
+  upcoming: FellowSessionProps[];
 }

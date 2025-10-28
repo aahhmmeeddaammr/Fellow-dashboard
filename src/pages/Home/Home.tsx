@@ -126,7 +126,7 @@ const FellowHomePage = () => {
         <div className="Table">
           <h2 className="text-2xl text-primary font-extrabold">Upcoming Sessions</h2>
           <Suspense fallback={<div>Loading sessions...</div>}>
-            <FellowSessionsTable sessionsData={allUpcomingSessions.slice(0,3)} />
+            <FellowSessionsTable sessionsData={allUpcomingSessions.slice(0, 3)} />
           </Suspense>
         </div>
 

@@ -1,10 +1,6 @@
-import React from "react";
+import type { IconProps } from "./BookIcon";
 
-export default function PresentationChartIcon({
-  fill,
-  duration,
-  transition,
-}: IconProps) {
+export default function PresentationChartIcon({ fill, duration, transition }: IconProps) {
   return (
     <svg
       width="17"

@@ -1,4 +1,4 @@
-import React from "react";
+import type { IconProps } from "./BookIcon";
 
 export default function UserIcon({ fill, duration, transition }: IconProps) {
   return (

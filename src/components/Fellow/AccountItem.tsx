@@ -2,7 +2,7 @@ import { useState } from "react";
 import InputField from "../common/InputField";
 
 export default function AccountItem({ label, value }: { label: string; value?: string }) {
-  const [field, setField] = useState<string | null>(null);
+  const [field] = useState<string | null>(null);
   if (value || field) {
     return (
       <div className="flex flex-col">
