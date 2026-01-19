@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../Hooks/useModal";
 import SidebarLink from "../layouts/SidebarLink";
 import DashboardModal from "./Modal";
-
+import ClockIcon from "../../icons/ClockIcon";
 const LogoutModal = ({ showName, className }: { showName?: boolean; variant?: "student" | "admin"; className?: string }) => {
   const { openModal, openModals, closeModal } = useModal();
   const modalName = "LogoutModal";
@@ -52,11 +52,11 @@ const LogoutModal = ({ showName, className }: { showName?: boolean; variant?: "s
           buttonText="Yes, log me out"
           title="Are you sure you want to log out ?!"
           modalName={modalName}
-          icon={"/images/clock.svg"}
+          icon={"/clock.svg"}
         ></DashboardModal>
       )}
     </>
   );
-};
+};  
 
 export default LogoutModal;

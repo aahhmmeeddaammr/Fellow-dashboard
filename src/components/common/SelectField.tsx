@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Controller } from "react-hook-form";
 
 interface SelectType {
@@ -18,21 +18,27 @@ interface SelectFieldProps {
   isCountrySelect?: boolean;
   isModal?: boolean;
   icon?: React.ReactNode;
-  control: any; // react-hook-form control
+  control: any;
 }
 
-const SelectDiv = ({ item, onClick, isModal }: { item: SelectType; onClick: () => void; isModal: boolean }) => {
-  return (
-    <div
-      onMouseDown={onClick}
-      className={`${
-        isModal && "text-xs font-medium"
-      } p-3 border-t-2 border-[#0097B259] bg-[#DDFAFF] text-primaryDark cursor-pointer hover:bg-cyan-500 hover:text-white transition-all duration-100`}
-    >
-      {item.item}
-    </div>
-  );
-};
+const SelectDiv = ({
+  item,
+  onClick,
+  isModal,
+}: {
+  item: SelectType;
+  onClick: () => void;
+  isModal: boolean;
+}) => (
+  <div
+    onMouseDown={onClick}
+    className={`${
+      isModal && "text-xs font-medium"
+    } p-3 border-t-2 border-[#0097B259] bg-[#DDFAFF] text-primaryDark cursor-pointer hover:bg-cyan-500 hover:text-white transition-all duration-100`}
+  >
+    {item.item}
+  </div>
+);
 
 export default function SelectField({
   label,
@@ -45,8 +51,30 @@ export default function SelectField({
   isModal = false,
 }: SelectFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState<"left" | "right" | "default">("default");
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const toggleOpen = () => setIsOpen((p) => !p);
+
+  useEffect(() => {
+    if (isOpen && dropdownRef.current && containerRef.current) {
+      const dropdownRect = dropdownRef.current.getBoundingClientRect();
+      const screenWidth = window.innerWidth;
+
+      // Reset to default
+      setPosition("default");
+
+      // If dropdown goes beyond right edge
+      if (dropdownRect.right > screenWidth) {
+        setPosition("right");
+      }
+      // If dropdown goes beyond left edge
+      else if (dropdownRect.left < 0) {
+        setPosition("left");
+      }
+    }
+  }, [isOpen]);
 
   return (
     <Controller
@@ -56,7 +84,7 @@ export default function SelectField({
         const selected = options.find((opt) => opt.value === field.value) || null;
 
         return (
-          <div className="max-h-fit relative">
+          <div className="max-h-fit relative" ref={containerRef}>
             <div
               id={name}
               tabIndex={0}
@@ -84,17 +112,19 @@ export default function SelectField({
                 ) : (
                   <div className="flex items-center gap-1">
                     {icon}
-                    <span className="text-nowrap pointer-events-none">{selected ? selected.item : label}</span>
+                    <span className="text-nowrap pointer-events-none">
+                      {selected ? selected.item : label}
+                    </span>
                   </div>
                 )}
                 <svg
-                  className={
+                  className={`transition-all ${isOpen && "rotate-180"} ${
                     isModal
-                      ? `fill-primary transition-all ${isOpen && "rotate-180"}`
-                      : `${selected ? "fill-primary" : "fill-[#979797]"} ${
-                          isOpen && "rotate-180 fill-primary"
-                        } transition-all group-hover:fill-primary`
-                  }
+                      ? "fill-primary"
+                      : selected
+                      ? "fill-primary"
+                      : "fill-[#979797] group-hover:fill-primary"
+                  }`}
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -110,11 +140,19 @@ export default function SelectField({
               </div>
             </div>
 
+            {/* Dropdown menu */}
             <div
+              ref={dropdownRef}
               hidden={!isOpen}
-              className={`max-h-[198px] rounded-b-lg overflow-y-auto ${
-                fixed ? "absolute top-full left-0 z-50 min-w-full w-max" : "max-w-full"
-              }`}
+              className={`max-h-[198px] rounded-b-lg overflow-y-auto z-50 min-w-full ${
+                fixed ? "absolute top-full" : ""
+              } ${
+                position === "right"
+                  ? "right-0"
+                  : position === "left"
+                  ? "left-0"
+                  : "left-0"
+              } bg-white shadow-md`}
             >
               {options.map((item, index) => (
                 <SelectDiv
@@ -122,7 +160,7 @@ export default function SelectField({
                   item={item}
                   isModal={isModal}
                   onClick={() => {
-                    field.onChange(item.value); // send value to react-hook-form
+                    field.onChange(item.value);
                     setIsOpen(false);
                   }}
                 />

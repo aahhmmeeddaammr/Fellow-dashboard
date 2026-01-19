@@ -73,29 +73,29 @@ const SupportPage = () => {
     try {
       setIsSubmitting(true);
 
-      // convert attached file to Base64 string if exists
-      let base64File = "";
+      const formData = new FormData();
+
+      formData.append("topic", values.topic);
+      formData.append("requestType", values.requestType);
+      formData.append("message", values.message);
+      formData.append("groupId", values.groupId);
+      formData.append("sessionId", values.sessionId);
+
+      // attach file if exists
       const file = values.attachedFile?.[0];
       if (file) {
-        base64File = await toBase64(file);
+        formData.append("attachedFile", file);
       }
 
-      const payload = {
-        topic: values.topic,
-        requestType: values.requestType,
-        message: values.message,
-        groupId: values.groupId,
-        sessionId: values.sessionId,
-        attachedFile: base64File, // send as string
-      };
-
-      await api.post("/Fellow/Support", payload, {
-        headers: { "Content-Type": "application/json" },
+      await api.post("/Fellow/Support", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       toast.success("Support request sent successfully!");
       reset();
-    } catch {
+    } catch (err) {
       toast.error("Something went wrong!");
     } finally {
       setIsSubmitting(false);
